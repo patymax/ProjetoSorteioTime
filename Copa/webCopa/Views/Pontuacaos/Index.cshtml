@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Modelo.Pontuacao>
+
+@{
+    ViewBag.Title = "Resultado da Copa";
+}
+
+<h2>Index</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.fase)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nomeTime)
+        </th>
+              <th>
+            @Html.DisplayNameFor(model => model.pontos)
+        </th>
+                
+        <th>
+            @Html.DisplayNameFor(model => model.resultado)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.fase)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nomeTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.pontos)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.resultado)
+        </td>
+                
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

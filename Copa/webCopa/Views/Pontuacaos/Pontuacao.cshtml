@@ -1,0 +1,53 @@
+﻿@model  List<Modelo.Pontuacao>
+
+@{
+    ViewBag.Title = "Pontuacao";
+}
+
+
+@{
+    ViewBag.Title = "Pontuacao";
+}
+
+<div>
+    <h4>Pontuacao</h4>
+    <hr />
+
+    @foreach (var item in ViewData["Pontuacao"])
+                    {
+
+                       
+    <dl class="dl-horizontal">
+        <dt>
+           
+           @item.nomeGrupo
+        </dt>
+
+        <dd>
+            @item.nomeGrupo
+        </dd>
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.nomeGrupo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nomeGrupo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dtCadastro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dtCadastro)
+        </dd>*@
+
+        
+    </dl>
+    }
+</div>
+<p>
+    @*@Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")*@
+</p>

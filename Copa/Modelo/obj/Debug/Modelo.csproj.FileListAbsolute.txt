@@ -1,0 +1,5 @@
+C:\Users\Administrador\Documents\Visual Studio 2013\Projects\Copa\Modelo\bin\Debug\Modelo.dll.config
+C:\Users\Administrador\Documents\Visual Studio 2013\Projects\Copa\Modelo\bin\Debug\Modelo.dll
+C:\Users\Administrador\Documents\Visual Studio 2013\Projects\Copa\Modelo\bin\Debug\Modelo.pdb
+C:\Users\Administrador\Documents\Visual Studio 2013\Projects\Copa\Modelo\obj\Debug\Modelo.dll
+C:\Users\Administrador\Documents\Visual Studio 2013\Projects\Copa\Modelo\obj\Debug\Modelo.pdb

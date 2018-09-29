@@ -1,0 +1,245 @@
+﻿@model Modelo.Time
+
+
+@{
+    ViewBag.Title = "Details";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        <p>@ViewBag.Status</p>
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    </div>
+
+    if (ViewBag.Lista != null)
+    {
+           <p>
+                @Html.ActionLink("Create New", "Create")
+            </p>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nome)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.dtCadastro)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.dtAtualizacao)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in (List<Modelo.Time>)ViewData["Lista"])
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.dtCadastro)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.dtAtualizacao)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                    </td>
+                </tr>
+            }
+
+        </table>
+    }
+
+
+    if (ViewBag.ErroSorteio != null)
+    {
+        <span>@ViewBag.ErroSorteio!</span>
+    }
+    else
+    {
+        if (ViewBag.Times != null)
+        {
+            var count = 0;
+            var counta = 0;
+            var countb = 0;
+
+
+            <div class="sorteioTimes">
+                <h2>Sorteio</h2>
+                <table>
+
+                    @foreach (var item in (List<Modelo.Time>)ViewData["Times"])
+                    {
+                        count = count + 1;
+                        counta = counta + 1;
+                        countb = countb + 1;
+
+                        Modelo.Time novo = new Modelo.Time();
+                        novo.Nome = item.Nome;
+
+
+
+                        if (count <= 2)
+                        {
+                            <tr style="width:200px;">
+                                <td>
+
+                                    @if (counta <= 1)
+                                    {
+
+
+
+                                        <label>Grupo A : </label> @novo.Nome;
+
+
+
+                                    }
+                                    else
+                                    {
+
+
+                                        <label> X </label>  @novo.Nome;
+
+
+
+                                    }
+                                </td>
+                            </tr>
+
+                        }
+                        else
+                        {
+
+                            <tr style="width:200px;">
+                                <td>
+                                    @if ((counta >= 3) && (countb == 3))
+                                    {
+                                        <label>Grupo B : </label> @novo.Nome;
+                                    }
+                                    else
+                                    {
+                                        <label> X </label>  @novo.Nome;
+                                    }
+                                </td>
+
+                            </tr>
+                        }
+                    }
+
+                </table>
+            </div>
+        }
+    }
+
+    if (ViewBag.GanhadorCopa != null)
+    { 
+        <label>O ganhador da Copda do Mundo é @ViewBag.GanhadorCopa</label>
+    <br />
+    
+        <label>@ViewBag.Time1.nomeTime = @ViewBag.Time1.pontos </label>
+    <br />
+    <label>@ViewBag.Time2.nomeTime = @ViewBag.Time2.pontos </label>
+    <br />
+    
+    }
+    else
+    {
+
+        if (ViewBag.ResultadoPrimeiraRodada != null)
+        {
+
+        <div class="ResultadoPrimeiraRodada">
+
+            @*@Html.Partial("~/Views/Pontuacaos/Pontuacao.cshtml", ViewData["Pontuacao"])*@
+
+            <h2>Resultado Primeira Rodada</h2>
+
+            <table>
+
+                @foreach (var item in (List<Modelo.Pontuacao>)ViewData["Pontuacao"])
+                {
+
+
+                    if (item.nomeGrupo == "A")
+                    {
+                        <tr style="width:200px;">
+                            <td>
+
+
+                                Grupo A
+                                Time: @item.nomeTime
+                                pontuação = @item.pontos;
+
+                            </td>
+                        </tr>
+
+                    }
+                    else
+                    {
+                        <tr style="width:200px;">
+                            <td>
+
+
+                                Grupo B
+                                Nome:  @item.nomeGrupo;
+                                Time: @item.nomeTime
+                                pontuação = @item.pontos;
+
+
+                            </td>
+                        </tr>
+
+                    }
+                    
+                    
+
+                }
+
+                O ganhador Fase1 do GrupoA é :  @ViewBag.GanhadorA;
+                O ganhador Fase1 do GrupoB é :  @ViewBag.GanhadorB;
+                
+            </table>
+        </div>
+    }
+    }
+
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            @*<input type="submit" value="Sorteio" class="btn btn-default sorteio" />*@
+            @Html.ActionLink("Sorteio", "Sortear", null, new { @class = "btn btn-default sorteio" })
+
+            @Html.ActionLink("Jogar", "Jogar", null, new { @class = "btn btn-default jogar" })
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@*@section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }*@
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryunobtrusive") @*For unobtrusive-ajax*@
+    @Scripts.Render("~/bundles/jqueryval") @*For validate and validate-unobtrusive*@
+
+    <script type="text/javascript">
+        $('.jogar').click(function () {
+
+            $('.sorteioTimes').toggle();
+        });
+    </script>
+}
